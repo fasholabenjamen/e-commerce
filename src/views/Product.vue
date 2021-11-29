@@ -48,18 +48,24 @@ export default {
       this.getProduct()
   },
   methods: {
-      getProduct() {
+      async getProduct() {
+          this.$store.commit('setIsLoading', true)
+
           const category_slug = this.$route.params.category_slug;
           const product_slug = this.$route.params.product_slug;
 
-          axios
+         await axios
           .get(`products/${category_slug}/${product_slug}`)
           .then(response => {
               this.product = response.data
+
+              document.title = this.product.name + ' | E-commerce'
           })
           .catch(error => {
               console.log(error)
           })
+
+          this.$store.commit('setIsLoading', false)
       },
 
       addToCart() {

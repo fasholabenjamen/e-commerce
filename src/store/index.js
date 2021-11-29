@@ -29,6 +29,10 @@ export default createStore({
       else {
         state.cart.items.push(item)
       }
+    },
+
+    setIsLoading(state, status) {
+      state.isLoading = status
     }
   },
 
